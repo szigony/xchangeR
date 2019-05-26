@@ -24,8 +24,11 @@
 #' # Specific date range
 #' eurusds("2019-05-01", "2019-05-24")
 #'
-#' # Last 45 days
-#' eurusds(date_to = "2019-05-24", last_x_days = 45)
+#' # Last 45 days from a specific date
+#' eurusds(date_to = "2019-05-01", last_x_days = 45)
+#'
+#' # Last 45 days from today
+#' eurusds(last_x_days = 45)
 #'
 #' @seealso \code{\link{eurusd}}
 
@@ -33,6 +36,9 @@ eurusds <- function(date_from, date_to, last_x_days = NULL) {
   if (is.null(last_x_days)) {
     date_from <- date_from
   } else {
+    if (missing(date_to)) {
+      date_to <- format(Sys.Date(), "%Y-%m-%d")
+    }
     date_from <- format(as.Date(date_to, "%Y-%m-%d") - last_x_days, "%Y-%m-%d")
   }
 

@@ -28,8 +28,11 @@ Looks up the daily USD/EUR exchange rate via an API call for the specified date 
 # Specific date range
 eurusds("2019-05-01", "2019-05-24")
 
-# Last 45 days
-eurusds(date_to = "2019-05-24", last_x_days = 45)
+# Last 45 days from a specific date
+eurusds(date_to = "2019-05-01", last_x_days = 45)
+
+# Last 45 days from today
+eurusds(last_x_days = 45)
 
 }
 \seealso{
