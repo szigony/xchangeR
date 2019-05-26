@@ -1,6 +1,3 @@
-# Write a function that reverses eur, eg call it uneur, so it takes a string (eg "-€0.10") and transforms to a number (eg -0.10 in this case).
-# Make sure it works with the "big mark" as well (eg for "$100,000")
-
 #' Reverse Euro format
 #'
 #' Converts a string in Euro format to number.

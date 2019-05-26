@@ -14,5 +14,13 @@
 #' @seealso \code{\link{eurusds}}
 
 eurusd <- function() {
-  content(GET("https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR"))$rates$EUR
+  content(
+    GET(
+      "https://api.exchangeratesapi.io/latest",
+      query = list(
+        base = "USD",
+        symbols = "EUR"
+      )
+    )
+  )$rates$EUR
 }

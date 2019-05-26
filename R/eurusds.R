@@ -26,13 +26,15 @@
 
 eurusds <- function(date_from, date_to) {
   exchange_rates <- content(
-    GET("https://api.exchangeratesapi.io/history",
-        query = list(
-          base = "USD",
-          symbols = "EUR",
-          start_at = date_from,
-          end_at = date_to
-        ))
+    GET(
+      "https://api.exchangeratesapi.io/history",
+      query = list(
+        base = "USD",
+        symbols = "EUR",
+        start_at = date_from,
+        end_at = date_to
+      )
+    )
   )$rates
 
   eurusds <- data.table(
