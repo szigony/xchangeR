@@ -10,6 +10,7 @@
 #'
 #' @param date_from The start of the range.
 #' @param date_to The end of the range.
+#' @param last_x_days Return the exchange rates for the last X days compared to \code{date_to}.
 #'
 #' @return Returns the daily exchange rates.
 #'
@@ -20,11 +21,21 @@
 #' }
 #'
 #' @examples
+#' # Specific date range
 #' eurusds("2019-05-01", "2019-05-24")
+#'
+#' # Last 45 days
+#' eurusds(date_to = "2019-05-24", last_x_days = 45)
 #'
 #' @seealso \code{\link{eurusd}}
 
-eurusds <- function(date_from, date_to) {
+eurusds <- function(date_from, date_to, last_x_days = NULL) {
+  if (is.null(last_x_days)) {
+    date_from <- date_from
+  } else {
+    date_from <- format(as.Date(date_to, "%Y-%m-%d") - last_x_days, "%Y-%m-%d")
+  }
+
   exchange_rates <- content(
     GET(
       "https://api.exchangeratesapi.io/history",

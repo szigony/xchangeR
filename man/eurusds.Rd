@@ -9,12 +9,14 @@
     \item \code{exchange_rate}: Daily exchange rate.
 }}
 \usage{
-eurusds(date_from, date_to)
+eurusds(date_from, date_to, last_x_days = NULL)
 }
 \arguments{
 \item{date_from}{The start of the range.}
 
 \item{date_to}{The end of the range.}
+
+\item{last_x_days}{Return the exchange rates for the last X days compared to \code{date_to}.}
 }
 \value{
 Returns the daily exchange rates.
@@ -23,7 +25,11 @@ Returns the daily exchange rates.
 Looks up the daily USD/EUR exchange rate via an API call for the specified date range.
 }
 \examples{
+# Specific date range
 eurusds("2019-05-01", "2019-05-24")
+
+# Last 45 days
+eurusds(date_to = "2019-05-24", last_x_days = 45)
 
 }
 \seealso{
