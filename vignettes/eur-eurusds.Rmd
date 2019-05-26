@@ -1,0 +1,117 @@
+---
+title: "Demo of `eur` and `eurusds` from the `xchangeR` package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{eur-eurusds}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4
+)
+```
+
+This vignette demos the usage of two functions from the `xchangeR` package:
+
+* `eur` converts a number to a string by adding the Euro sign (€), rounding up to 2 digits and using the comma as the separator.
+* `eurusds` looks up the daily USD/EUR exchange rate via an API call for the specified date range.
+
+In this demo we're going to:
+
+1. Fetch the daily volume of Bitcoins sold for "USDT" on Binance in the past 45 days.
+1. Calculate the prices in EUR.
+1. Report on the overall value of the asset in EUR on a `ggplot`.
+
+## Load the `xchangeR` package
+
+```{r setup}
+# Install the package if necessary
+# remotes::install_github("szigony/xchangeR")
+library(xchangeR)
+```
+
+Other packages used for this demo:
+
+* `binancer`
+* `dplyr`
+* `data.table`
+* `ggplot2`
+* `scales`
+
+```{r, include = FALSE}
+library(binancer)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+library(scales)
+```
+
+## Fetch the daily volume of Bitcoins sold
+
+Let's look at the daily Bitcoin prices in USD for the past 45 days. We're only interested in the day (`open_time`) and the opening price (`open`).
+
+```{r}
+btc_prices <- as.data.table(
+  binance_klines("BTCUSDT", interval = "1d", limit = 45) %>% 
+  mutate(date = as.Date(open_time, format = "%Y-%m-%d"),
+         price = open) %>% 
+  select(date, price)
+)
+```
+
+## Calculate the price in EUR
+
+At this point we have the daily prices for Bitcoin, but only in USD. In order to see the prices in EUR, we have to look up the daily exchange rates by utilizing the `eurusds` function and join them to `btc_prices`.
+
+```{r}
+exchange_rates <- eurusds(last_x_days = 45)
+head(left_join(btc_prices, exchange_rates, by = "date"))
+```
+
+As we can see, there are some `NA` values in the `exchange_rate` column. The reason for this is that the exchange rates are only available from the API for weekdays. To overcome this obstacle, we have to apply a rolling join, rather than a left join.
+
+```{r}
+# Set the keys for the join
+setkey(btc_prices, date)
+setkey(exchange_rates, date)
+
+btc_prices <- exchange_rates[btc_prices, roll = TRUE] %>% 
+  na.omit()
+head(btc_prices)
+```
+
+Now we can calculate the price in EUR, and format it as such with the `eur` function.
+
+```{r}
+btc_prices <- btc_prices %>% 
+  mutate(price_in_eur = eur(exchange_rate * price)) %>%
+  select(date, price_in_eur)
+head(btc_prices)
+
+# E.g. the price for the first day in Euro format:
+btc_prices$price_in_eur[1]
+```
+
+## Report on the overall value of the asset
+
+As we converted the price to Euro format in the previous example, in order to visualize it, we'll utilize the `uneur` function from the `xchangeR` package that transforms the string to a number.
+
+```{r, fig.align = "center"}
+ggplot(btc_prices, aes(date, uneur(price_in_eur))) +
+  geom_col(fill = "skyblue2") +
+  ggtitle("Bitcoin prices in Euro for the past 45 days") +
+  labs(x = NULL, y = NULL) +
+  scale_y_continuous(breaks = seq(0, 7500, 500), labels = eur) +
+  scale_x_date(labels = date_format("%m-%d"), date_breaks = "5 days") +
+  geom_hline(yintercept = mean(uneur(btc_prices$price_in_eur)), color = "indianred2", size = 1) +
+  annotate(geom = "text", x = min(btc_prices$date) + 6, 
+           y = mean(uneur(btc_prices$price_in_eur)) + 250, size = 3.5,
+           label = paste("Mean price in Euro:", eur(mean(uneur(btc_prices$price_in_eur))))) +
+  theme(axis.text.x = element_text(angle = 45),
+        plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+```

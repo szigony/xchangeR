@@ -19,11 +19,7 @@
 eur <- function(x) {
   amount <- format(round(x, 2), nsmall = 2, big.mark = ",")
 
-  if (amount < 0) {
-    eur_amount <- paste0("-", str_replace(amount, "-", "€"))
-  } else {
-    eur_amount <- paste0("€", amount)
-  }
+  eur_amount <- ifelse(amount < 0, paste0("-", str_replace(amount, "-", "€")), paste0("€", amount))
 
   return(eur_amount)
 }

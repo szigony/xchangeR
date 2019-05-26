@@ -16,5 +16,5 @@
 #' @seealso \code{\link{eur}}
 
 uneur <- function(x) {
-  format(str_replace(str_replace(x, "€", ""), ",", ""), nsmall = 2)
+  as.numeric(format(str_replace(str_replace(x, "€", ""), ",", ""), nsmall = 2))
 }
