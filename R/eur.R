@@ -17,7 +17,7 @@
 #' @seealso \code{\link{uneur}}
 
 eur <- function(x) {
-  amount <- format(round(x, 2), nsmall = 2, big.mark = ",")
+  amount <- format(round(x, 2), nsmall = 2, big.mark = ",", scientific = FALSE)
 
   eur_amount <- ifelse(amount < 0, paste0("-", str_replace(amount, "-", "€")), paste0("€", amount))
 

@@ -4,7 +4,7 @@
 #'
 #' @export
 #'
-#' @importFrom stringr str_replace
+#' @importFrom stringr str_replace str_replace_all
 #'
 #' @param x The string in Euro format to be transformed to number.
 #'
@@ -16,5 +16,5 @@
 #' @seealso \code{\link{eur}}
 
 uneur <- function(x) {
-  as.numeric(format(str_replace(str_replace(x, "€", ""), ",", ""), nsmall = 2))
+  as.numeric(format(str_replace_all(str_replace(x, "€", ""), ",", ""), nsmall = 2))
 }
