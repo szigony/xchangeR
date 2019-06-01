@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Demo of <code>eur</code> and <code>eurusds</code> from the <code>xchangeR</code> package • xchangeR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Demo of &lt;code&gt;eur&lt;/code&gt; and &lt;code&gt;eurusds&lt;/code&gt; from the &lt;code&gt;xchangeR&lt;/code&gt; package">
@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -38,27 +38,35 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    How To
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/eur-eurusds.html">Demo of `eur` and `eurusds` from the `xchangeR` package</a>
+      <a href="../articles/eur-eurusds.html">Usage of eurusds, eur and uneur</a>
     </li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/szigony/xchangeR/">
+    <span class="fa fa-github fa-lg"></span>
+     
+    github
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -126,12 +134,12 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">exchange_rates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eurusds.html">eurusds</a></span>(<span class="dt">last_x_days =</span> <span class="dv">45</span>)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(<span class="kw">left_join</span>(btc_prices, exchange_rates, <span class="dt">by =</span> <span class="st">"date"</span>))</a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt;         date   price exchange_rate</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; 1 2019-04-14 5047.45            NA</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; 2 2019-04-15 5131.28     0.8839388</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; 3 2019-04-16 5024.95     0.8845644</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; 4 2019-04-17 5173.72     0.8848774</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; 5 2019-04-18 5202.41     0.8888889</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; 6 2019-04-19 5258.44            NA</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; 1 2019-04-18 5202.41     0.8888889</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; 2 2019-04-19 5258.44            NA</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; 3 2019-04-20 5258.68            NA</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; 4 2019-04-21 5292.91            NA</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; 5 2019-04-22 5257.41            NA</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; 6 2019-04-23 5357.14     0.8892841</span></a></code></pre></div>
 <p>As we can see, there are some <code>NA</code> values in the <code>exchange_rate</code> column. The reason for this is that the exchange rates are only available from the API for weekdays. To overcome this obstacle, we have to apply a rolling join, rather than a left join.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Set the keys for the join</span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw">setkey</span>(btc_prices, date)</a>
@@ -141,28 +149,28 @@
 <a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/na.fail">na.omit</a></span>()</a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(btc_prices)</a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;          date exchange_rate   price</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1: 2019-04-15     0.8839388 5131.28</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 2: 2019-04-16     0.8845644 5024.95</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 3: 2019-04-17     0.8848774 5173.72</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 4: 2019-04-18     0.8888889 5202.41</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 5: 2019-04-19     0.8888889 5258.44</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 6: 2019-04-20     0.8888889 5258.68</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1: 2019-04-18     0.8888889 5202.41</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 2: 2019-04-19     0.8888889 5258.44</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 3: 2019-04-20     0.8888889 5258.68</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 4: 2019-04-21     0.8888889 5292.91</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 5: 2019-04-22     0.8888889 5257.41</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 6: 2019-04-23     0.8892841 5357.14</span></a></code></pre></div>
 <p>Now we can calculate the price in EUR, and format it as such with the <code>eur</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">btc_prices &lt;-<span class="st"> </span>btc_prices <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_in_eur =</span> <span class="kw"><a href="../reference/eur.html">eur</a></span>(exchange_rate <span class="op">*</span><span class="st"> </span>price)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">select</span>(date, price_in_eur)</a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(btc_prices)</a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt;         date price_in_eur</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1 2019-04-15    \2004,535.74</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2 2019-04-16    \2004,444.89</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 2019-04-17    \2004,578.11</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4 2019-04-18    \2004,624.36</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5 2019-04-19    \2004,674.17</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 6 2019-04-20    \2004,674.38</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 1 2019-04-18    \2004,624.36</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 2 2019-04-19    \2004,674.17</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 3 2019-04-20    \2004,674.38</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 4 2019-04-21    \2004,704.81</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 5 2019-04-22    \2004,673.25</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 6 2019-04-23    \2004,764.02</span></a>
 <a class="sourceLine" id="cb5-12" title="12"></a>
 <a class="sourceLine" id="cb5-13" title="13"><span class="co"># E.g. the price for the first day in Euro format:</span></a>
 <a class="sourceLine" id="cb5-14" title="14">btc_prices<span class="op">$</span>price_in_eur[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; [1] "\2004,535.74"</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; [1] "\2004,624.36"</span></a></code></pre></div>
 </div>
 <div id="report-on-the-overall-value-of-the-asset" class="section level2">
 <h2 class="hasAnchor">

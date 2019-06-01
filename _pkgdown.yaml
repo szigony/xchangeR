@@ -1,0 +1,35 @@
+title: xchangeR
+url: https://szigony.github.io/xchangeR/
+template:
+  params:
+    bootswatch: flatly
+reference:
+  - title: Exchange Rates API
+    desc: Functions that use the Exchange Rates API
+    contents:
+      - '`eurusd`'
+      - '`eurusds`'
+  - title: Conversion
+    desc: Exchange rate conversion
+    contents:
+      - '`convert_usd_to_eur`'
+  - title: Formatting
+    desc: Create or decrypt EUR format
+    contents:
+      - '`eur`'
+      - '`uneur`'
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Functions"
+      href: reference/index.html
+    - text: "How To"
+      menu:
+      - text: Usage of eurusds, eur and uneur
+        href: articles/eur-eurusds.html
+  right:
+    - icon: fa-github fa-lg
+      text: "github"
+      href: https://github.com/szigony/xchangeR/

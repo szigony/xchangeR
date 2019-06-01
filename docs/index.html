@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>xchangeR package for USD/EUR exchange rate • xchangeR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="xchangeR package for USD/EUR exchange rate">
@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -38,27 +38,35 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="reference/index.html">Functions</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    How To
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/eur-eurusds.html">Demo of `eur` and `eurusds` from the `xchangeR` package</a>
+      <a href="articles/eur-eurusds.html">Usage of eurusds, eur and uneur</a>
     </li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/szigony/xchangeR/">
+    <span class="fa fa-github fa-lg"></span>
+     
+    github
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -69,7 +77,102 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-This package contains functions to return the USD/EUR exchange rates and compute the currency values.
+<div id="xchanger" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#xchanger" class="anchor"></a>xchangeR</h1></div>
+<p>A package to acquire the EUR/USD exchange rates from the <a href="https://exchangeratesapi.io/">Exchange Rates API</a> and format the numbers as euros. It also allows for easy conversion of USD to EUR.</p>
+<p>This package was created as the take-home assignment for <em>Mastering R skills</em> at CEU, Budapest.</p>
+<div id="table-of-contents" class="section level4">
+<h4 class="hasAnchor">
+<a href="#table-of-contents" class="anchor"></a>Table of contents</h4>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#use-case">Use-case</a></li>
+<li><a href="#website">Website</a></li>
+</ul>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p><code>xchangeR</code> is not on CRAN yet, please install from GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">'szigony/xchangeR'</span>)</a></code></pre></div>
+</div>
+<div id="functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#functions" class="anchor"></a>Functions</h2>
+<ul>
+<li>
+<a href="R/eurusd.R"><strong><code>eurusd</code></strong></a>
+<ul>
+<li>Looks up the most recent USD/EUR exchange rate via an API call and returns the rate as a number.</li>
+</ul>
+</li>
+<li>
+<a href="R/eurusds.R"><strong><code>eurusds</code></strong></a>
+<ul>
+<li>Looks up the daily USD/EUR exchange rate via an API call for the specified date range.</li>
+<li>Parameters:
+<ul>
+<li>
+<code>date_from</code> - The start of the range.</li>
+<li>
+<code>date_to</code> - The end of the range.</li>
+<li>
+<code>last_x_days</code> - Return the exchange rates for the last X days compared to <code>date_to</code> or today.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="R/convert_usd_to_eur.R"><strong><code>convert_usd_to_eur</code></strong></a>
+<ul>
+<li>Looks up the most recent USD/EUR exchange rate and computes the provided USD amount in EUR.</li>
+<li>Parameter:
+<ul>
+<li>
+<code>usd_amount</code> - The amount in USD to be converted to EUR.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="R/eur.R"><strong><code>eur</code></strong></a>
+<ul>
+<li>Converts a number to a string using the Euro sign, rounding up to 2 digits and using the comma as the separator.</li>
+<li>Parameter:
+<ul>
+<li>
+<code>x</code> - The number to be formatted as Euro.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="R/uneur.R"><strong><code>uneur</code></strong></a>
+<ul>
+<li>Converts a string in Euro format to number.</li>
+<li>Parameter:
+<ul>
+<li>
+<code>x</code> - The string in Euro format to be transformed to number.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="use-case" class="section level2">
+<h2 class="hasAnchor">
+<a href="#use-case" class="anchor"></a>Use-case</h2>
+<p>A vignette demoing the usage of <code>eurusds</code> and <code>eur</code> with Bitcoin data from Binance is available <a href="vignettes/eur-eurusds.Rmd">here</a>.</p>
+</div>
+<div id="website" class="section level2">
+<h2 class="hasAnchor">
+<a href="#website" class="anchor"></a>Website</h2>
+<p>A website showcasing the package’s capabilities was created with <code>pkgdown</code>, and is available <a href="https://szigony.github.io/xchangeR/">here</a>.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
